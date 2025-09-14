@@ -10,10 +10,11 @@ describe('Checkout AppActions', () => {
 
   it('Deve logar, escolher produto e fechar a compra', () => {
     cy.loginViaUI(email, senha);
-
+    cy.clearCart();
+    
     cy.goToBrowse();
-    cy.openProductByIndex(6);
-    cy.addProductToCart();
+    cy.openRandomInStockProduct();
+    cy.addRandomAvailableProductToCart()
 
     cy.continueToPayment();
     cy.completeCheckout();

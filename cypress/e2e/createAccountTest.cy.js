@@ -1,10 +1,16 @@
 /// <reference types="cypress" />
 
-const { homePage }    = require('../support/pages/home.page');
-const loginPage       = require('../support/pages/login.page');
-const registerPage    = require('../support/pages/register.page');
-const { profilePage } = require('../support/pages/profile.page');
-const { uniqueEmail, uniquePhone } = require('../support/utils');
+const { homePage }      = require('../support/pages/home.page');
+const loginPage         = require('../support/pages/login.page');
+const registerPage      = require('../support/pages/register.page');
+const { profilePage }   = require('../support/pages/profile.page');
+const {
+  uniqueEmail,
+  uniquePhone,
+  randomFirstName,
+  randomLastName,
+  uniquePassword,
+} = require('../support/utils');
 
 describe('Fluxo de criação de conta', () => {
   beforeEach(() => {
@@ -12,13 +18,13 @@ describe('Fluxo de criação de conta', () => {
     cy.visit('/');
   });
 
-  it('Deve criar a conta', () => {
+  it('Deve criar a conta (dados dinâmicos)', () => {
     const user = {
-      firstName: 'Teste',
-      lastName:  'Cliente',
+      firstName: randomFirstName(),
+      lastName:  randomLastName(),
       phone:     uniquePhone(),
       email:     uniqueEmail(),
-      password:  'Teste@123',
+      password:  uniquePassword(12),
     };
 
     homePage.openMenu('Account');
@@ -29,4 +35,3 @@ describe('Fluxo de criação de conta', () => {
     profilePage.customerName().should('contain', user.firstName);
   });
 });
-

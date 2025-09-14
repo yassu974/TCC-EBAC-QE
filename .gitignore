@@ -1,0 +1,7 @@
+node_modules/
+cypress/reports/
+cypress/videos/
+cypress/screenshots/
+cypress/fixtures/data.json
+cypress.env.json
+.DS_Store

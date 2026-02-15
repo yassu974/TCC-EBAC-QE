@@ -4,12 +4,12 @@
   "description": "Execicio Intercept do Cypress",
   "main": "index.js",
   "scripts": {
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
-    "cy:run:headed": "cypress run --headed",
-    "cy:run:chrome": "cypress run --browser chrome",
-    "report:open": "start \"\" .\\cypress\\reports\\html\\index.html",
-    "report:clean": "rimraf cypress/reports",
+    "cy:open": "cypress open --config-file UI/cypress.config.js",
+    "cy:run": "cypress run --config-file UI/cypress.config.js",
+    "cy:run:headed": "cypress run --headed --config-file UI/cypress.config.js",
+    "cy:run:chrome": "cypress run --browser chrome --config-file UI/cypress.config.js",
+    "report:clean": "rimraf UI/cypress/reports",
+    "report:open": "start \"\" \"UI\\cypress\\reports\\html\\index.html\"",
     "test:report": "npm run report:clean && npm run cy:run && npm run report:open"
   },
   "author": "renanferreira",

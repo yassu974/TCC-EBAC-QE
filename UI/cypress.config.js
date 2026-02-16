@@ -13,9 +13,10 @@ module.exports = defineConfig({
   },
 
   e2e: {
-    baseUrl: 'http://lojaebac.ebaconline.art.br/',
+    baseUrl: 'http://localhost',
     specPattern: 'UI/cypress/e2e/**/*.cy.js',
     fixturesFolder: 'UI/cypress/fixtures',
+    supportFile: 'UI/cypress/support/e2e.js',
 
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);

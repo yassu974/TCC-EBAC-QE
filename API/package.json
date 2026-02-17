@@ -1,0 +1,13 @@
+{
+  "name": "tcc-ebac-qe-api",
+  "version": "1.0.0",
+  "description": "Testes de API - US-0003",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "supertest": "^6.3.0"
+  }
+}

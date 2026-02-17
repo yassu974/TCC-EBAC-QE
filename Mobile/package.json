@@ -1,0 +1,23 @@
+{
+  "name": "mobile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "wdio config/wdio.conf.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@wdio/cli": "^9.24.0",
+    "@wdio/local-runner": "^9.24.0",
+    "@wdio/mocha-framework": "^9.24.0",
+    "mocha": "^11.7.5",
+    "webdriverio": "^9.24.0"
+  },
+  "devDependencies": {
+    "@wdio/allure-reporter": "^9.24.0",
+    "@wdio/spec-reporter": "^9.24.0"
+  }
+}

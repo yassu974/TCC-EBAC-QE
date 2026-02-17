@@ -1,20 +1,47 @@
-/// <reference types="cypress" />
-
 class LoginPage {
-  get email()      { return cy.get('[data-testid="email"]'); }
-  get password()   { return cy.get('[data-testid="password"]'); }
-  get btnLogin()   { return cy.get('[data-testid="btnLogin"]'); }
-  get linkSignUp() { return cy.get('[data-testid="signUp"]'); }
 
-  login(email, password) {
-    this.email.type(email);
-    this.password.type(password);
-    this.btnLogin.click();
+  visit() {
+    cy.visit('/minha-conta/');
   }
 
-  goToRegister() {
-    this.linkSignUp.click();
+  getUsernameField() {
+    return cy.get('#username');
   }
+
+  getPasswordField() {
+    return cy.get('#password');
+  }
+
+  getLoginButton() {
+    return cy.get('.woocommerce-form > .button');
+  }
+
+  fillUsername(username) {
+    this.getUsernameField().clear().type(username);
+  }
+
+  fillPassword(password) {
+    this.getPasswordField().clear().type(password);
+  }
+
+  submit() {
+    this.getLoginButton().click();
+  }
+
+  login(username, password) {
+    this.fillUsername(username);
+    this.fillPassword(password);
+    this.submit();
+  }
+
+  getErrorMessage() {
+    return cy.get('.woocommerce-error');
+  }
+
+  logout() {
+    cy.contains('a', 'Logout').click();
+  }
+
 }
 
-module.exports = new LoginPage();
+export const loginPage = new LoginPage();

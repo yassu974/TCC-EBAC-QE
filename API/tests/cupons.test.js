@@ -78,5 +78,4 @@ describe('US-0003 - API de Cupons', () => {
         expect(response.body.data).toHaveProperty('status', 400);
 
 });
-
 });

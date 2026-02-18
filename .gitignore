@@ -5,3 +5,7 @@ cypress/screenshots/
 cypress/fixtures/data.json
 cypress.env.json
 .DS_Store
+
+# Allure reports
+Mobile/allure-results/
+Mobile/allure-report/

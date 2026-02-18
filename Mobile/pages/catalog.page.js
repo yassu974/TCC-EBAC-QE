@@ -1,7 +1,5 @@
 class CatalogPage {
 
-    // ===== SELECTORS =====
-
     get browseTab() {
         return $('android=new UiSelector().descriptionContains("Browse")');
     }
@@ -14,26 +12,21 @@ class CatalogPage {
         return $('(//android.widget.TextView[contains(@text,"R$")])[1]');
     }
 
-    // ===== ACTIONS =====
-
     async goToBrowseWithReset() {
-        // Primeiro clique no Browse
         await this.browseTab.waitForDisplayed({ timeout: 10000 });
         await this.browseTab.click();
 
         await browser.pause(2000);
 
-        // Vai para Home
         await this.homeTab.waitForDisplayed({ timeout: 10000 });
         await this.homeTab.click();
 
         await browser.pause(2000);
 
-        // Volta para Browse
         await this.browseTab.waitForDisplayed({ timeout: 10000 });
         await this.browseTab.click();
 
-        await browser.pause(3000); // tempo extra para API carregar
+        await browser.pause(3000);
     }
 
     async waitForProductsToLoad() {

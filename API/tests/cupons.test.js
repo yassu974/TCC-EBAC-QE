@@ -7,7 +7,7 @@ describe('US-0003 - API de Cupons', () => {
     pass: '@admin!&b@c!2022'
   };
 
-    it('CT-011 - Deve listar todos os cupons (GET)', async () => {
+    it('CT-012 - Deve listar todos os cupons (GET)', async () => {
         const response = await request(baseURL)
         .get('/wp-json/wc/v3/coupons')
         .auth(auth.user, auth.pass);
@@ -26,7 +26,7 @@ describe('US-0003 - API de Cupons', () => {
 
   });
 
-    it('CT-012 - Deve criar um cupom válido (POST)', async () => {
+    it('CT-016 - Deve criar um cupom válido (POST)', async () => {
         const codigo = `CupomTeste${Date.now()}`;
 
         const novoCupom = {
@@ -50,7 +50,7 @@ describe('US-0003 - API de Cupons', () => {
 
     });
 
-    it('CT-013 - Não deve permitir criar cupom duplicado', async () => {
+    it('CT-017 - Não deve permitir criar cupom duplicado', async () => {
         const codigoDuplicado = `CupomDuplicado${Date.now()}`;
 
         const novoCupom = {

@@ -141,7 +141,11 @@ Configuração aplicada:
 
 # Testes de API – Supertest + Jest
 
-Pasta: `/API`
+Entrar na pasta:
+
+```bash
+cd API
+```
 
 ---
 
@@ -228,7 +232,11 @@ npx rimraf UI/cypress/reports
 
 # Testes Mobile – WebdriverIO + Appium
 
-Pasta: `/Mobile`
+Entrar na pasta:
+
+```bash
+cd Mobile
+```
 
 ---
 

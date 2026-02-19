@@ -3,7 +3,6 @@
 import { loginPage } from '../support/pages/login.page';
 
 describe('US-0002 - Login na Plataforma', () => {
-
   let user;
 
   before(() => {
@@ -13,7 +12,6 @@ describe('US-0002 - Login na Plataforma', () => {
       user = u;
     });
 
-    // Faz logout após criar conta
     cy.contains('Logout').click();
   });
 
@@ -45,7 +43,6 @@ describe('US-0002 - Login na Plataforma', () => {
   });
 
   it('CT-010 - Não deve bloquear usuário após 3 tentativas inválidas (Regra não implementada)', () => {
-
     for (let i = 1; i <= 3; i++) {
       loginPage.login(user.email, 'SenhaInvalida123');
       loginPage.getErrorMessage().should('be.visible');

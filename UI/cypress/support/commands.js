@@ -75,15 +75,12 @@ Cypress.Commands.add('createAccount', () => {
     .clear()
     .type(password);
 
-  // BOTÃO REGISTER - seletor correto (input submit)
   cy.get('input[name="register"]')
     .should('be.visible')
     .click();
 
-  // valida se entrou na conta
   cy.get('body', { timeout: 10000 })
     .should('contain', 'Logout');
 
-  // salva credenciais criadas
   cy.wrap({ email, password }).as('createdUser');
 });

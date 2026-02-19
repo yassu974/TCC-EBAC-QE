@@ -20,38 +20,36 @@ Projeto final de automação de testes contemplando:
 TCC-EBAC-QE
 │
 ├── API
-│   ├── tests
-│   ├── package.json
-│   └── jest.config.js
+│ ├── tests
+│ ├── package.json
+│ └── jest.config.js
 │
 ├── UI
-│   ├── cypress
-│   │   ├── e2e
-│   │   ├── fixtures
-│   │   ├── support
-│   │   ├── reports
-│   │   └── screenshots
-│   ├── cypress.config.js
-│   └── package.json
+│ ├── cypress
+│ │ ├── e2e
+│ │ ├── fixtures
+│ │ ├── support
+│ │ ├── reports
+│ ├── cypress.config.js
 │
 ├── Mobile
-│   ├── config
-│   ├── pages
-│   ├── tests
-│   ├── allure-results
-│   ├── allure-report
-│   └── package.json
+│ ├── config
+│ ├── pages
+│ ├── tests
+│ ├── allure-results
+│ ├── allure-report
+│ └── package.json
 │
 ├── performance
-│   ├── login.test.js
-│   ├── home.test.js
-│   └── README.md
+│ ├── login.test.js
+│ ├── browse.test.js
+│ └── users.js
 │
 ├── .github
-│   └── workflows
-│       └── ci.yml
+│ └── workflows
+│ └── ci.yml
 │
-├── docker-compose.yml
+├── package.json
 ├── README.md
 └── .gitignore
 ```

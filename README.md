@@ -22,6 +22,7 @@ TCC-EBAC-QE
 ├── API
 │   ├── tests
 │   ├── package.json
+│   └── jest.config.js
 │
 ├── UI
 │   ├── cypress
@@ -29,16 +30,30 @@ TCC-EBAC-QE
 │   │   ├── fixtures
 │   │   ├── support
 │   │   ├── reports
-│   │   └── cypress.config.js
+│   │   └── screenshots
+│   ├── cypress.config.js
 │   └── package.json
 │
 ├── Mobile
 │   ├── config
 │   ├── pages
 │   ├── tests
+│   ├── allure-results
+│   ├── allure-report
 │   └── package.json
 │
-└── performance
+├── performance
+│   ├── login.test.js
+│   ├── home.test.js
+│   └── README.md
+│
+├── .github
+│   └── workflows
+│       └── ci.yml
+│
+├── docker-compose.yml
+├── README.md
+└── .gitignore
 ```
 
 ---
@@ -97,9 +112,64 @@ http://localhost
 
 ---
 
+# Testes de Performance (k6)
+
+Entrar na pasta:
+
+```bash
+cd performance
+```
+
+Executar teste de login:
+
+```bash
+k6 run login.test.js
+```
+
+Executar teste de navegação/home:
+
+```bash
+k6 run home.test.js
+```
+
+Configuração aplicada:
+- 20 usuários virtuais
+- 2 minutos de execução
+- Ramp-up de 20 segundos
+- Threshold p95 configurado
+- Taxa máxima de erro < 5%
+
+---
+
+# Testes de API – Supertest + Jest
+
+Pasta: `/API`
+
+---
+
+## Instalar dependências
+
+```bash
+npm install
+```
+
+## Rodar testes de API
+
+```bash
+npm test
+```
+
+ou
+
+```bash
+npm run test
+```
+
+---
+
 # Testes Web – Cypress
 
-📁 Pasta: `/UI`
+Pasta: `/UI`
 
 ---
 
@@ -158,39 +228,13 @@ npx rimraf UI/cypress/reports
 
 ---
 
-# Testes de API – Supertest + Jest
-
-📁 Pasta: `/API`
-
----
-
-## Instalar dependências
-
-```bash
-npm install
-```
-
-## Rodar testes de API
-
-```bash
-npm test
-```
-
-ou
-
-```bash
-npm run test
-```
-
----
-
 # Testes Mobile – WebdriverIO + Appium
 
-📁 Pasta: `/Mobile`
+Pasta: `/Mobile`
 
 ---
 
-## 🔧 Pré-requisitos
+## Pré-requisitos
 
 - Android Emulator ativo
 - Appium Server rodando na porta 4723
@@ -211,7 +255,7 @@ npm install
 
 ---
 
-## ▶ Rodar testes Mobile
+## Rodar testes Mobile
 
 ```bash
 npm test
@@ -244,27 +288,33 @@ npx rimraf Mobile/allure-report
 
 ---
 
-# Fluxo Ideal de Execução Local
+# Integração Contínua (CI)
 
-## UI
+A pipeline está configurada em:
 
-```bash
-npm run test:report
+```
+.github/workflows/ci.yml
 ```
 
-## API
+Ela executa automaticamente:
+- Instalação de dependências
+- Testes Cypress em modo headless
+- Upload de artifacts
 
-```bash
-cd API
-npm test
-```
+Disparada automaticamente a cada:
+- Push na branch main
+- Pull Request para main
 
-## Mobile
+---
 
-```bash
-cd Mobile
-npm test
-```
+# Ordem Recomendada de Execução Local
+
+1. Subir Docker
+2. Executar Performance
+3. Executar API
+4. Executar UI
+5. Executar Mobile
+6. Commit + Push (CI roda automaticamente)
 
 ---
 

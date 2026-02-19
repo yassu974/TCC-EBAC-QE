@@ -1,0 +1,88 @@
+name: CI - EBAC QE
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # -------------------------
+      # 🐳 Subir Docker da Loja
+      # -------------------------
+      - name: 🐳 Create Docker Network
+        run: docker network create ebac-network
+
+      - name: 🐳 Start Database
+        run: |
+          docker run -d \
+          --name wp_db \
+          --network ebac-network \
+          -p 3306:3306 \
+          ernestosbarbosa/lojaebacdb:latest
+
+      - name: 🐳 Start Application
+        run: |
+          docker run -d \
+          --name wp \
+          --network ebac-network \
+          -p 80:80 \
+          ernestosbarbosa/lojaebac:latest
+
+      - name: ⏳ Wait for Application
+        run: |
+          for i in {1..20}; do
+            if curl -s http://localhost | grep -q "EBAC"; then
+              echo "Application is up!"
+              break
+            fi
+            echo "Waiting for application..."
+            sleep 5
+          done
+
+      # -------------------------
+      # 🔌 API TESTS
+      # -------------------------
+      - name: 📦 Install API Dependencies
+        run: |
+          cd API
+          npm install
+
+      - name: 🧪 Run API Tests
+        run: |
+          cd API
+          npm test
+
+      # -------------------------
+      # 🌐 UI TESTS
+      # -------------------------
+      - name: 📦 Install UI Dependencies
+        run: |
+          cd UI
+          npm install
+
+      - name: 🧪 Run Cypress Tests
+        run: |
+          cd UI
+          npx cypress run
+
+      # -------------------------
+      # 📊 Upload Cypress Reports
+      # -------------------------
+      - name: 📤 Upload Cypress Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-reports
+          path: UI/cypress/reports

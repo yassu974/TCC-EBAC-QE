@@ -84,6 +84,12 @@ docker run -d \
 ernestosbarbosa/lojaebac:latest
 ```
 
+## Subir os containers existentes
+
+```bash
+docker start wp_db wp
+```
+
 ## Verificar containers ativos
 
 ```bash
